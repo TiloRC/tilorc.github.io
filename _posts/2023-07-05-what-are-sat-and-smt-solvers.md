@@ -7,7 +7,7 @@ math: true
 
 I’ll be walking through some examples of problems SAT and SMT solvers solve. Then I’ll be using python wrappers for PicoSAT and Z3 to solve the example problems. If you’re familiar with python, you should be able to follow along and run my code without trouble.
 
-# What’s a SAT solver?
+## What’s a SAT solver?
 
 Let $b_1$, $b_2$, $b_3$ be boolean variables. Then is the following boolean formula satisfiable?
 
@@ -88,7 +88,7 @@ pip install pycosat
 ```
 
 
-# What’s an SMT solver?
+## What’s an SMT solver?
 
 SMT solvers are generalizations of SAT solvers. SAT solvers check if a boolean formula is satisfiable, whereas an SMT solver determines whether any mathematical formula is satisfiable—the formula could involve integers, real numbers, some type of data structure, or something else. 
 
