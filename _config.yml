@@ -28,8 +28,6 @@ url: "https://tilorc.github.io"
 github:
   username: TiloRC # change to your GitHub username
 
-#twitter:
-#  username: twitter_username # change to your Twitter username
 
 social:
   # Change to your full name.
@@ -203,7 +201,6 @@ compress_html:
   profile: false
   blanklines: false
   ignore:
-    envs: [development
 
 exclude:
   - "*.gem"
