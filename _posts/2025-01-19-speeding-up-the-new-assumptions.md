@@ -34,18 +34,13 @@ F1 = Q.negative(x) & (Q.prime(x) | Q.positive(x)) & rules
 F2 = ~Q.negative(x) & (Q.prime(x) | Q.positive(x)) & rules
 ```
 
-| F1 Satisfiable | F2 Satisfiable | Result of `satask`                   |
-| -------------- | -------------- | ------------------------------------ |
-| Yes            | Yes            | None (both are satisfiable)          |
-| Yes            | No             | True (proposition is true)           |
-| No             | Yes            | False (proposition is false)         |
-| No             | No             | Exception (inconsistent assumptions) |
+| F1 Satisfiable | F2 Satisfiable               | Result of `satask`         |
+| -------------- | ---------------------------- | -------------------------- |
+|                | No                           | True (proposition is true) |
+| No             | False (proposition is false) |                            |
+|                | No                           | N                          |
 
-Here, "rules" represents a large formula encoding many of SymPy’s predicate rules. [One](https://github.com/sympy/sympy/blob/97e74c1a97d0cf08ef63be24921f5c9e620d3e68/sympy/assumptions/facts.py#L87-L88) of the rules encoded by this formula states that expressions cannot be both positive and negative. [Another](https://github.com/sympy/sympy/blob/97e74c1a97d0cf08ef63be24921f5c9e620d3e68/sympy/assumptions/facts.py#L105) states that prime expressions must be positive. As a consequence of these two rules, F1 is unsatisfiable and F2 is satisfiable. Thus `satask` determines the query `Q.negative(x)` is false.
-
-## What’s so bad about `satask`?
-
-The primary issue with `satask` lies in the size of the rules formula it generates. These formulas cannot simply be fixed for every query; their size grows with the number of expressions and the complexity of each expression involved in a query. 
+Here, "rules" esents a large formula ensoding many of SymPy’s predicate rules. [One](https://github.com/sympy/sympy/blob/97e74c1a97d0cf08ef63be24921f5c9e620d3e68/sympy/assumptions/facts.py#L87-L88) of the rules e[cod](https://github.com/sympy/sympy/blob/97e74c1a97d0cf08ef63be24921f5c9e620d3e68/sympy/assumptions/facts.py#L87-L88)ssions must be positive. As a consequence of these two rules, F1 is unsatisfiable and F2 is satisfia[le. Thu](https://github.com/sympy/sympy/blob/97e74c1a97d0cf08ef63be24921f5c9e620d3e68/sympy/assumptions/facts.py#L105)
 
 | Query                              | Number of clauses in rules formula |
 | ---------------------------------- | ---------------------------------- |
@@ -55,13 +50,7 @@ The primary issue with `satask` lies in the size of the rules formula it generat
 
 dfssdfdssdfsdfsdfsdfsfd
 
-Simple queries should not require solving such large SAT problems. Only the rules relevant to a particular query should be involved, and it shouldn’t be necessary to repeat the same rules for each variable. Furthermore, it should also be possible to solve simple queries in constant time with respect to the number of rules by using a dictionary (as the `_ask_single_fact` function accomplishes). 
-
-## My solution 
-
-Rather than creating large formulas that encode SymPy’s rules, a helper that understands these rules can be added to the SAT solver. The helper will add formulas representing some of the rules as needed during the SAT solving process. 
-
-We’ll still construct two boolean formula as part of `satask`, but these won’t come with any rules. For example:
+Simple queries should not require solving such large Sroblems. Only the rules relevant to a particulaery should be involved, and it shouldn’t be necessary to repeae same rules for each variable. Furthermore, it shoul&lt;tablecell colspan="1" rowspan="1"&gt;&lt;paragraph&gt;&lt;/paragraph&gt;&lt;/tablecell&gt;&lt;tablecell colspan="1" rowspan="1"&gt;&lt;paragraph&gt;&lt;/paragraph&gt;&lt;/tablecell&gt;
 
 ```plaintext
 F1 = Q.negative(x) & (Q.prime(x) | Q.positive(x))
@@ -279,6 +268,6 @@ I suppose “b | c” could be a literal. And you could add rules “b -> b | c�
 
 As a consequence, check_consistency([Q.real(x), ~Q.negative(x), ~Q.zero(x), ~Q.positive(x)]) 
 
-Minimal conflict clauses
+Minimal conflict clauses&lt;paragraph&gt;As a consequence, check_consistency(\[Q.real(x), \~Q.negative(x), \~Q.zero(x), \~Q.positive(x)\]) &lt;/paragraph&gt;&lt;paragraph&gt;Minimal conflict clauses&lt;/paragraph&gt;&lt;paragraph&gt;This is all very abstract. Lets look at an example.&lt;/paragraph&gt;
 
-This is all very abstract. Lets look at an example.
+This is all very abstract. Lets look at an example.add rules “b -&gt; b | c” and “c -&gt; b | c” and their contrapositives. 
